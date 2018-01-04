@@ -36,6 +36,17 @@ recommend installing carton for this, but apt-get/yum will work too).
 
 3. Test the installation with 'make test'.  You should get an HTML file.
 
+Note that if you do use carton to install the perl dependencies, you
+will need to configure the the PERL5LIB environment variable like this
+(for bash):
+
+  export PERL5LIB=/path/to/finke/local/lib/perl5
+
+You might optionally want to include finke on your path:
+
+  export PATH="$PATH:/path/to/finke"
+
+
 ## CREATE A NEW GAME
 
 Finke works on a project directory that must contain the following files:
