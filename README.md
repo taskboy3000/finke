@@ -61,6 +61,7 @@ Next, create a simple card layout template in a file called card.html.tt:
   <div class="card">
     [% card.id %] : [% card.rule %]
   </div>
+```
 
 Every card layout should be enclosed an a block element called 'card'.
 This template is included in a layout template called cards.html.tt
@@ -82,6 +83,7 @@ Let's define the content of our cards in a file called rules.json:
     { "id": "2", "rule": "Get another turn" },
     { "id": "3", "rule": "You win!" }
   ]
+```
 
 The rules structure is just a list of objects written in object
 notation. Each object represents one card.  The is no requirement on
@@ -96,7 +98,7 @@ ensures that both properties appear on the cards.
 
 Finally we can generate the HTML by invoking Finke:
 
-/path/to/install/dir/finke /path/to/battlefish
+  /path/to/install/dir/finke /path/to/battlefish
 
 ### ADVANCED OPTIONS
 
@@ -123,6 +125,7 @@ template string.  For example, you can have a property of a card object in rules
 
 ```javascript
    [ { "suit": "[% HEARTS %]" } ]
+```
 
 In your templating code, you would need to process the suit property
 again to get the HTML you want.
@@ -131,6 +134,7 @@ again to get the HTML you want.
    <div class="card">
       [% card.suit.process %]
    </div>
+```
 
 This will render the correct HTML.
 
