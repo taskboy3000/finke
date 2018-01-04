@@ -1,2 +1,2 @@
 test:
-	perl ./process.pl t/01
+	perl ./finke t/01
