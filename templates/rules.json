@@ -1,0 +1,10 @@
+/*
+   This is an example JSON file that would need to be customized for each game.
+   This is a list of objects with arbitrary properties (id is nice to have)
+*/
+[
+    {
+	"id": 1,
+	"rule" : "Convert die to opposite color"
+    },
+]

@@ -1,0 +1,55 @@
+#!/usr/bin/env perl
+use strict;
+
+
+use JSON;
+use Template;
+use File::Slurp;
+use FindBin;
+
+
+my $dir = shift @ARGV;
+unless ($dir) {
+    die("$0 [DIR]\n");
+}
+
+Main($dir); exit;
+
+#----------
+# subs
+#----------
+sub Main {
+    my $dir = shift;
+
+    for my $required ("./$dir/card.html.tt", "./$dir/rules.json") {
+	if (!-e $required) {
+	    die("Missing $required\n");
+	}
+    }
+
+    my $global_file = "./$dir/global.json";
+    my %globals;
+    if (-e $global_file) {
+	%globals = %{ JSON::from_json(read_file($global_file)) };
+    }
+    
+    my $T = Template->new(INCLUDE_PATH => "$FindBin::Bin/templates/:$dir",
+			  RELATIVE => 1,
+			  VARIABLES => \%globals,
+	                 );
+
+    my $cards = JSON::from_json(read_file("./$dir/rules.json"));
+    my $vars = { cards => $cards };
+
+    $Template::Stash::SCALAR_OPS->{ process } = sub {
+	my ($string) = @_;
+	my $buffer = "";
+	if (!$T->process(\$string, $vars, \$buffer)) {
+	    warn($T->error());
+	}
+	return $buffer;
+	
+    };
+    
+    $T->process("cards.html.tt", $vars) || warn($T->error);
+}

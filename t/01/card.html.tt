@@ -1,0 +1,3 @@
+<div class="card">
+  [% card.id %] : [% card.rule %]
+</div>
