@@ -27,16 +27,29 @@ sub Main {
 	}
     }
 
+    # some validation for the json
+    for my $name ("global", "rules") {
+	my $file = "./$dir/$name.json";
+	next unless -e $file;
+
+	eval {
+	    JSON::from_json(read_file($file));
+	    1;
+	} or do {
+	    die("ERROR> Cannot parse '$file':\n$@\n");
+	}
+    }
+
     my $global_file = "./$dir/global.json";
     my %globals;
     if (-e $global_file) {
 	%globals = %{ JSON::from_json(read_file($global_file)) };
     }
-    
+
     my $T = Template->new(INCLUDE_PATH => "$FindBin::Bin/templates/:$dir",
 			  RELATIVE => 1,
 			  VARIABLES => \%globals,
-	                 );
+			 );
 
     my $cards = JSON::from_json(read_file("./$dir/rules.json"));
     my $vars = { cards => $cards };
@@ -48,8 +61,8 @@ sub Main {
 	    warn($T->error());
 	}
 	return $buffer;
-	
+
     };
-    
+
     $T->process("cards.html.tt", $vars) || warn($T->error);
 }
