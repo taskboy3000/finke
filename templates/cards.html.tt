@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>    
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css">
-     .cards { width: 680px; height: 1015px; border: 1px solid #ecc; padding: 2px;}
+     .cards { width: 680px; height: 939px; border: 1px solid #ecc; padding: 2px;}
      .card { width: 205px; height: 360px; border: 2px solid black; padding: 3px; margin-right: 8px; margin-bottom: 10px; float: left; }
     </style>
     
